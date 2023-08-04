@@ -25,6 +25,11 @@ a {
     text-decoration: inherit;
 }
 
+.emoji {
+    height: 1em;
+    width: 1em;
+}
+
 .container {
     width: 95%;
     max-width: 640px;
@@ -41,7 +46,7 @@ a {
     color: var(--fg);
 }
 
-.header img {
+.header > img {
     border-radius: 50%;
     margin-top: 50px;
     width: 150px;
@@ -55,8 +60,20 @@ a {
 
 .category .item {
     font-size: 1.2em;
-    padding: 5px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 20px;
     color: var(--fg);
     background-color: var(--bg);
+}
+
+.linkbox {
+    border-radius: 30px;
+    border: solid var(--accent);
+    margin: 5px 0;
+    padding: 0 20px;
+    background-color: var(--button);
+}
+
+.linkbox h2 a {
+    color: var(--fg) !important;
 }

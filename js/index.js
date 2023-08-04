@@ -4,9 +4,11 @@ document.documentElement.style.setProperty(`--grad`, grad);
 
 if (isDarkMode) {
     document.documentElement.style.setProperty(`--bg`, '#081B33');
+    document.documentElement.style.setProperty(`--button`, '#152642');
     document.documentElement.style.setProperty(`--fg`, '#ffffff');
 } else {
     document.documentElement.style.setProperty(`--bg`, '#ffffff');
+    document.documentElement.style.setProperty(`--button`, '#fefefe');
     document.documentElement.style.setProperty(`--fg`, '#081B33');
 }
 
@@ -45,8 +47,8 @@ function parseMd(md){ // 깃허브 등에 사용하는 마크다운 파일을 ht
     md = md.replace(/\n[\#]{5}(.+)/g, '<h5>$1</h5>');
     md = md.replace(/\n[\#]{4}(.+)/g, '<h4>$1</h4>');
     md = md.replace(/\n[\#]{3}(.+)/g, '<h3>$1</h3>');
-    md = md.replace(/\n[\#]{2}(.+)/g, '<h2>$1</h2>');
-    md = md.replace(/\n[\#]{1}(.+)/g, '</div></div><div class="item_wrap"><div class="line">✦</div><div class="item"><h1>' + titleEmoji + ' $1</h1>');
+    md = md.replace(/\n[\#]{2}(.+)/g, '<div class="linkbox"><h2>$1</h2></div>');
+    md = md.replace(/\n[\#]{1}(.+)/g, '</div></div><div class="item_wrap"><div class="line">✦</div><div class="item"><h1>' + twemoji.parse(titleEmoji) + ' $1</h1>');
     
     //images with links
     md = md.replace(/\!\[([^\]]+)\]\(([^\)]+)\)[\(]{1}([^\)\"]+)(\"(.+)\")?[\)]{1}/g, '<div class="gallery"><a href="$3"><img class="postimage" src="$2" alt="$1" width="100%" /></a></div>');
@@ -148,20 +150,13 @@ if (!category && !project) {
     document.querySelector(".header").innerHTML += "<p>"+githubUserName+"</p>";
     document.querySelector(".category").innerHTML += "<div class='item'><a href='?'>전체</a></div>";
 
-    const asyncCat = (i) => {
-        return new Promise(resolve => {
-            document.querySelector(".category").innerHTML += "<div class='item'><a href='?c="+categoriesURL[i]+"'>"+categories[i]+"</div>";
-            fetch("https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/"+categoriesURL[i]+".md")
-            .then(res => res.text())
-            .then((out) => {
-                document.querySelector(".main").innerHTML += parseMd(out)
-            })
-        })
-      }
 
     (async() => {
-        for (let i = 0; i < a.length; i++) {
-            await asyncCat(i)
+        for (let i = 0; i < categories.length; i++) {
+            document.querySelector(".category").innerHTML += "<div class='item'><a href='?c="+categoriesURL[i]+"'>"+categories[i]+"</div>";
+            var response = await fetch("https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/"+categoriesURL[i]+".md")
+			var markdown = await response.text();
+            document.querySelector(".main").innerHTML += parseMd(markdown)
         }
     })()
     var url = "https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/README.md"

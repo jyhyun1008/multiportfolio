@@ -5,7 +5,7 @@ const githubUserName = 'jyhyun1008' // 깃허브 아이디
 const githubRepoName = 'multiportfolio' // 깃허브 레포지토리 이름
 
 // 외형
-const isDarkMode = true
+const isDarkMode = false
 
 const accent = '#ff9899'
 const grad = '#fde5b4'
