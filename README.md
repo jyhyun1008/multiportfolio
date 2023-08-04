@@ -1,2 +1,3 @@
-# multiportfolio
-linktree for multipotentialite :3
+# 자기소개
+
+'뭔가 이것저것' 하는 사람
