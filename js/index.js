@@ -6,10 +6,12 @@ if (isDarkMode) {
     document.documentElement.style.setProperty(`--bg`, '#081B33');
     document.documentElement.style.setProperty(`--button`, '#152642');
     document.documentElement.style.setProperty(`--fg`, '#ffffff');
+    document.documentElement.style.setProperty(`--title`, grad);
 } else {
     document.documentElement.style.setProperty(`--bg`, '#ffffff');
-    document.documentElement.style.setProperty(`--button`, '#fefefe');
+    document.documentElement.style.setProperty(`--button`, '#f1f3f5');
     document.documentElement.style.setProperty(`--fg`, '#081B33');
+    document.documentElement.style.setProperty(`--title`, accent);
 }
 
 function parseMd(md){ // 깃허브 등에 사용하는 마크다운 파일을 html로 변환시켜 줍니다.
@@ -40,7 +42,7 @@ function parseMd(md){ // 깃허브 등에 사용하는 마크다운 파일을 ht
     md = md.replace('</blockquote>\n<blockquote>', '\n');
 
     //hr
-    md = md.replace(/[\-]{3}/g, '</div></div><div class="item_wrap"><div class="line">✿</div><div class="item">');
+    md = md.replace(/[\-]{3}/g, '</div></div><div class="item_wrap"><div class="line">'+lineBreak+'</div><div class="item">');
     
     //h
     md = md.replace(/\n[\#]{6}(.+)/g, '<h6>$1</h6>');
@@ -48,7 +50,7 @@ function parseMd(md){ // 깃허브 등에 사용하는 마크다운 파일을 ht
     md = md.replace(/\n[\#]{4}(.+)/g, '<h4>$1</h4>');
     md = md.replace(/\n[\#]{3}(.+)/g, '<h3>$1</h3>');
     md = md.replace(/\n[\#]{2}(.+)/g, '<div class="linkbox"><h2>$1</h2></div>');
-    md = md.replace(/\n[\#]{1}(.+)/g, '</div></div><div class="item_wrap"><div class="line">✦</div><div class="item"><h1>' + twemoji.parse(titleEmoji) + ' $1</h1>');
+    md = md.replace(/\n[\#]{1}(.+)/g, '</div></div><div class="item_wrap"><div class="item"><h1>' + twemoji.parse(titleEmoji) + ' $1</h1>');
     
     //images with links
     md = md.replace(/\!\[([^\]]+)\]\(([^\)]+)\)[\(]{1}([^\)\"]+)(\"(.+)\")?[\)]{1}/g, '<div class="gallery"><a href="$3"><img class="postimage" src="$2" alt="$1" width="100%" /></a></div>');
@@ -147,18 +149,17 @@ var project = qs.p;
 if (!category && !project) {
     document.querySelector(".header").innerHTML = "<img src='./assets/profile.png'>";
     document.querySelector(".header").innerHTML += "<h1>"+userName+"</h1>";
-    document.querySelector(".header").innerHTML += "<p>"+githubUserName+"</p>";
-    document.querySelector(".category").innerHTML += "<div class='item'><a href='?'>전체</a></div>";
+    document.querySelector(".header").innerHTML += "<p><i class='bx bxl-github'></i> "+githubUserName+"</p>";
+    document.querySelector(".header").innerHTML += "<div class='line'>"+lineBreak+"</div>";
+    document.querySelector(".category").innerHTML += "<a href='?'><div class='item'>전체보기</div></a>";
 
-
-    (async() => {
-        for (let i = 0; i < categories.length; i++) {
-            document.querySelector(".category").innerHTML += "<div class='item'><a href='?c="+categoriesURL[i]+"'>"+categories[i]+"</div>";
-            var response = await fetch("https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/"+categoriesURL[i]+".md")
-			var markdown = await response.text();
-            document.querySelector(".main").innerHTML += parseMd(markdown)
+    for (let i = 0; i < categories.length; i++) {
+        document.querySelector(".category").innerHTML += "<a href='?c="+categories[i].url+"'><div class='item'>"+categories[i].title+"</div></a>";
+        document.querySelector(".main").innerHTML += '<h1>'+twemoji.parse(titleEmoji)+' '+categories[i].title+'</h1>'
+        for (let j = 0; j < categories[i].children.length; j++) {
+            document.querySelector(".main").innerHTML += "<a href='?p="+categories[i].children[j].url+"'><div class='linkbox'><h2>"+categories[i].children[j].title+"</h2></div></a>"
         }
-    })()
+    }
     var url = "https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/README.md"
     fetch(url)
     .then(res => res.text())
@@ -167,5 +168,44 @@ if (!category && !project) {
     })
     .catch(err => { throw err });
 } else if (category) {
+    document.querySelector(".header").innerHTML = "<img src='./assets/profile.png'>";
+    document.querySelector(".header").innerHTML += "<h1>"+userName+"</h1>";
+    document.querySelector(".header").innerHTML += "<p><i class='bx bxl-github'></i> "+githubUserName+"</p>";
+    document.querySelector(".header").innerHTML += "<div class='line'>"+lineBreak+"</div>";
+    document.querySelector(".category").innerHTML += "<a href='?'><div class='item'>전체보기</div></a>";
+
+    for (let i = 0; i < categories.length; i++) {
+        document.querySelector(".category").innerHTML += "<a href='?c="+categories[i].url+"'><div class='item'>"+categories[i].title+"</div></a>";
+        if (category == categories[i].url){
+            document.querySelector(".main").innerHTML += '<h1>'+twemoji.parse(titleEmoji)+' '+categories[i].title+'</h1>'
+            for (let j = 0; j < categories[i].children.length; j++) {
+                document.querySelector(".main").innerHTML += "<a href='?p="+categories[i].children[j].url+"'><div class='linkbox'><h2>"+categories[i].children[j].title+"</h2></div></a>"
+            }
+        }
+    }
+    var url = "https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/README.md"
+    fetch(url)
+    .then(res => res.text())
+    .then((out) => {
+        document.querySelector(".header").innerHTML += parseMd(out)
+    })
+    .catch(err => { throw err });
 } else if (project) {
+    document.querySelector(".header").innerHTML = "<div><a href='?'>돌아가기</a></div>";
+    document.querySelector(".header").innerHTML += "<img src='./assets/profile.png'>";
+    
+    for (let i = 0; i < categories.length; i++) {
+        for (let j = 0; j < categories[i].children.length; j++) {
+            if (project == categories[i].children[j].url){                
+                document.querySelector(".header").innerHTML += "<h1>"+categories[i].children[j].title+"</h1>";
+                document.querySelector(".header").innerHTML += "<div>"+categories[i].children[j].description+"</div>";
+            }
+        }
+    }
+    var url = "https://raw.githubusercontent.com/"+githubUserName+"/"+githubRepoName+"/main/project/"+project+".md"
+    fetch(url)
+    .then(res => res.text())
+    .then((out) => {
+        document.querySelector(".main").innerHTML += parseMd(out)
+    })
 }

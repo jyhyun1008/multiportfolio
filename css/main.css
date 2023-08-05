@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'default';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 body {
     font-family: 'default';
-    font-size: 18px;
+    font-size: 16px;
     background: linear-gradient(var(--accent),var(--grad));
 }
 
@@ -17,11 +17,11 @@ body {
 }
 
 h1 {
-    color: var(--grad);
+    color: var(--title);
 }
 
 a {
-    color: var(--grad);
+    color: var(--title);
     text-decoration: inherit;
 }
 
@@ -62,18 +62,19 @@ a {
     font-size: 1.2em;
     padding: 10px;
     border-radius: 20px;
-    color: var(--fg);
+    color: var(--fg) !important;
     background-color: var(--bg);
 }
 
 .linkbox {
     border-radius: 30px;
     border: solid var(--accent);
-    margin: 5px 0;
+    margin: 10px 0;
     padding: 0 20px;
     background-color: var(--button);
+    text-align: center;
 }
 
-.linkbox h2 a {
+.linkbox h2 {
     color: var(--fg) !important;
 }
