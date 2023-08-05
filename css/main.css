@@ -1,6 +1,13 @@
 @font-face {
     font-family: 'default';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'title';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/HSBombaram21-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
@@ -20,11 +27,16 @@ body {
 
 h1 {
     color: var(--title);
+    font-family: 'title';
 }
 
 a {
     color: var(--title);
     text-decoration: inherit;
+}
+
+i {
+    font-size: 20px;
 }
 
 .emoji {
