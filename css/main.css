@@ -8,6 +8,7 @@
 body {
     font-family: 'default';
     font-size: 16px;
+    line-height: 1.7em; 
     background: linear-gradient(var(--accent),var(--grad));
     background-attachment: fixed;
 }
@@ -78,4 +79,8 @@ a {
 
 .linkbox h2 {
     color: var(--fg) !important;
+}
+
+.main img {
+    border-radius: 20px;
 }
