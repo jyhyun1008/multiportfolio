@@ -5,12 +5,12 @@ const githubUserName = 'jyhyun1008' // 깃허브 아이디
 const githubRepoName = 'multiportfolio' // 깃허브 레포지토리 이름
 
 // 외형
-const isDarkMode = false
+const isDarkMode = true // 다크모드
 
-const accent = '#ff9899'
-const grad = '#fde5b4'
-const titleEmoji = '🍑'
-const lineBreak = '✦'
+const accent = '#ff9899' // 주요 컬러
+const grad = '#fde5b4' // 그라데이션 컬러
+const titleEmoji = '🍑' // 제목 옆에 붙을 에모지
+const lineBreak = '✦' // 구분선
 
 // 카테고리
 const categories = [{

@@ -192,7 +192,7 @@ if (!category && !project) {
     .catch(err => { throw err });
 } else if (project) {
     document.querySelector(".header").innerHTML = "<div><a href='?'>돌아가기</a></div>";
-    document.querySelector(".header").innerHTML += "<img src='./assets/profile.png'>";
+    document.querySelector(".header").innerHTML += "<img src='./assets/"+project+".png'>";
     
     for (let i = 0; i < categories.length; i++) {
         for (let j = 0; j < categories[i].children.length; j++) {
