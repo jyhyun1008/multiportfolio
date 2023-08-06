@@ -147,7 +147,7 @@ var category = qs.c;
 var project = qs.p;
 
 if (!category && !project) {
-    document.querySelector(".header").innerHTML = "<img src='./assets/profile.png'>";
+    document.querySelector(".header").innerHTML = "<img src='./assets/profile.gif'>";
     document.querySelector(".header").innerHTML += "<h1>"+userName+"</h1>";
     document.querySelector(".header").innerHTML += "<p><i class='bx bxl-github'></i> "+githubUserName+"</p>";
     document.querySelector(".header").innerHTML += "<div class='line'>"+lineBreak+"</div>";
@@ -168,7 +168,7 @@ if (!category && !project) {
     })
     .catch(err => { throw err });
 } else if (category) {
-    document.querySelector(".header").innerHTML = "<img src='./assets/profile.png'>";
+    document.querySelector(".header").innerHTML = "<img src='./assets/profile.gif'>";
     document.querySelector(".header").innerHTML += "<h1>"+userName+"</h1>";
     document.querySelector(".header").innerHTML += "<p><i class='bx bxl-github'></i> "+githubUserName+"</p>";
     document.querySelector(".header").innerHTML += "<div class='line'>"+lineBreak+"</div>";
