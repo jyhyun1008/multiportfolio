@@ -23,7 +23,7 @@ const categories = [{
     }, {
         title: '한국어권 연합우주',
         url: 'ynabz',
-        description: '설명'
+        description: '취미로 한국어권 연합우주 캐릭터들을 낙서합니다'
     }]
 }, {
     title: '음악',
