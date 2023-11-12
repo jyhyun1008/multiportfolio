@@ -35,7 +35,7 @@ const categories = [{
     }, {
         title: '재연',
         url: 'jymusic',
-        description: '설명'
+        description: '재연 개인 명의로 만들고 있는 음악들'
     }]
 }, {
     title: '개발',
@@ -80,5 +80,9 @@ const categories = [{
         title: '고덕국제클리닉',
         url: 'gic',
         description: '설명'
+    }, {
+        title: '죽도 코등이 디자인',
+        url: 'tsuba',
+        description: '3D캐드로 디자인한 죽도 코등이'
     }]
 }]
