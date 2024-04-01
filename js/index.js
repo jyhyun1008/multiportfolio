@@ -50,7 +50,7 @@ function parseMd(md){ // 깃허브 등에 사용하는 마크다운 파일을 ht
     md = md.replace(/\n[\#]{4}(.+)/g, '<h4>$1</h4>');
     md = md.replace(/\n[\#]{3}(.+)/g, '<h3>$1</h3>');
     md = md.replace(/\n[\#]{2}(.+)/g, '<div class="linkbox"><h2>$1</h2></div>');
-    md = md.replace(/\n[\#]{1}(.+)/g, '</div></div><div class="item_wrap"><div class="item"><h1>' + twemoji.parse(titleEmoji) + ' $1</h1>');
+    md = md.replace(/\n[\#]{1}(.+)/g, '</div></div><div class="item_wrap"><div class="item"><h1>' + titleEmoji + ' $1</h1>');
     
     //images with links
     md = md.replace(/\!\[([^\]]+)\]\(([^\)]+)\)[\(]{1}([^\)\"]+)(\"(.+)\")?[\)]{1}/g, '<div class="gallery"><a href="$3"><img class="postimage" src="$2" alt="$1" width="100%" /></a></div>');
@@ -155,7 +155,7 @@ if (!category && !project) {
 
     for (let i = 0; i < categories.length; i++) {
         document.querySelector(".category").innerHTML += "<a href='?c="+categories[i].url+"'><div class='item'>"+categories[i].title+"</div></a>";
-        document.querySelector(".main").innerHTML += '<h1>'+twemoji.parse(titleEmoji)+' '+categories[i].title+'</h1>'
+        document.querySelector(".main").innerHTML += '<h1>'+titleEmoji+' '+categories[i].title+'</h1>'
         for (let j = 0; j < categories[i].children.length; j++) {
             document.querySelector(".main").innerHTML += "<a href='?p="+categories[i].children[j].url+"'><div class='linkbox'><h2>"+categories[i].children[j].title+"</h2></div></a>"
         }
@@ -177,7 +177,7 @@ if (!category && !project) {
     for (let i = 0; i < categories.length; i++) {
         document.querySelector(".category").innerHTML += "<a href='?c="+categories[i].url+"'><div class='item'>"+categories[i].title+"</div></a>";
         if (category == categories[i].url){
-            document.querySelector(".main").innerHTML += '<h1>'+twemoji.parse(titleEmoji)+' '+categories[i].title+'</h1>'
+            document.querySelector(".main").innerHTML += '<h1>'+titleEmoji+' '+categories[i].title+'</h1>'
             for (let j = 0; j < categories[i].children.length; j++) {
                 document.querySelector(".main").innerHTML += "<a href='?p="+categories[i].children[j].url+"'><div class='linkbox'><h2>"+categories[i].children[j].title+"</h2></div></a>"
             }
